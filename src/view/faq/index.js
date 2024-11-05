@@ -12,8 +12,8 @@ export default function FAQ({ faq }) {
                     faq.map((item, index) => {
                         return (
                             <details key={index} open>
-                                <summary>{item.questao} ?</summary>
-                                <p>{item.resposta}</p>
+                                <summary>{item.questions} ?</summary>
+                                <p>{item.answers}</p>
                             </details>
                         )
                     })}</div>

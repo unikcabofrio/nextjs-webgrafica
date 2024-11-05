@@ -37,11 +37,11 @@ export default function Contato({ contact }) {
                         return (
                             <div key={index} className='cardBoxLojas'>
                                 <div className='titulo'>
-                                    <h1>{item.nome_loja}</h1>
+                                    <h1>{item.city}</h1>
                                 </div>
                                 <div className='listContato'>
                                     {
-                                        editContato(item.contato).map((itemContato, indexContato) => {
+                                        editContato(item.numbers).map((itemContato, indexContato) => {
                                             return (
                                                 <div key={indexContato}>
                                                     <Imagem src={Zap}/>
@@ -55,17 +55,17 @@ export default function Contato({ contact }) {
 
                                 <div className='Adress'>
                                     <IconeSVG icone={'pin_drop'} />
-                                    <p>{item.endereco}</p>
+                                    <p>{item.adress}</p>
                                 </div>
 
                                 <div className='timeHour'>
                                     <IconeSVG icone={'schedule'} />
-                                    <p>{item.funcionamento}</p>
+                                    <p>{item.openingHours}</p>
                                 </div>
 
                                 <div className='social'>
-                                    <Imagem src={Face} onClick={() => { window.open(item.link_facebook, '_blank') }} />
-                                    <Imagem src={Insta} onClick={() => { window.open(item.link_instagram, '_blank') }} />
+                                    <Imagem src={Face} onClick={() => { window.open(item.face, '_blank') }} />
+                                    <Imagem src={Insta} onClick={() => { window.open(item.insta, '_blank') }} />
                                 </div>
                             </div>
                         )

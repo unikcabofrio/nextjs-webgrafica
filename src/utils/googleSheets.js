@@ -7,7 +7,8 @@ let lastFetchTime = 0;
 export async function getAPI(sheetName,uuid = "") {
     const currentTime = Date.now();
 
-    if (cache && currentTime - lastFetchTime < 1800000) {
+
+    if (sheetName === "products" && cache && currentTime - lastFetchTime < 1800000) {
         console.log("Retornando dados do cache");
         return cache;
     }
@@ -37,8 +38,11 @@ export async function getAPI(sheetName,uuid = "") {
         const data = await response.json();
         
         // Atualiza o cache e o horário da última atualização
-        cache = data;
-        lastFetchTime = currentTime;
+        if (sheetName === "products"){
+            cache = data;
+            lastFetchTime = currentTime;
+        }
+        
 
         console.log("Dados atualizados e armazenados no cache");
         return data;

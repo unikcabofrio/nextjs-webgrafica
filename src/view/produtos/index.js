@@ -9,7 +9,7 @@ export default function Produtos({ filterProdutos, produtos }) {
                 {
                     !produtos ? <LoudCard /> :
                         produtos
-                            .filter(item => item.nome.toUpperCase().includes(filterProdutos.toUpperCase()))
+                            .filter(item => item.name.toUpperCase().includes(filterProdutos.toUpperCase()))
                             .map((item, index) => {
                                 return <ProdutosCard
                                     key={index}

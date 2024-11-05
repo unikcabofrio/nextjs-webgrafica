@@ -16,24 +16,31 @@ export default function Page() {
   const getData = async () => {
     try {
 
-      const res = await getAPI("products")
-      console.log(res)
-  
+      let res = await getAPI("products")
+      setProdutos(res.data)
+      
+
+      res = await getAPI("faq")
+      setFaq(res.data)
+
+      res = await getAPI("contact")
+      setContact(res.data)
+
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getData()
-  },[])
+  }, [])
 
   return (
     <>
-      {/* <TopMenu setFilterProdutos={setFilterProdutos} />
-      <Produtos filterProdutos={filterProdutos} produtos={produtos}/>
-      <FAQ faq={faq}/>
-      <Contato contact={contact}/> */}
+      <TopMenu setFilterProdutos={setFilterProdutos} />
+      <Produtos filterProdutos={filterProdutos} produtos={produtos} />
+      <FAQ faq={faq} />
+      <Contato contact={contact} />
     </>
   );
 }
