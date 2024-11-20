@@ -19,7 +19,6 @@ export default function Page() {
       let res = await getAPI("products")
       setProdutos(res.data)
       
-
       res = await getAPI("faq")
       setFaq(res.data)
 

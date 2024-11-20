@@ -1,8 +1,34 @@
 import Imagem from "@/components/image"
 
-export default function ProdutosCard({ item }, ...props) {
+export default function ProdutosCard({ item }) {
+    
+    // Função para formatar o preço
+    const confiPriceText = (text) => {
+        const containsLetter = /[a-zA-Z]/.test(text);
+
+        if (containsLetter) {
+            return Number.parseFloat(text) ? `R$ ${text}` : text;
+        }
+
+        const parsedNumber = Number.parseFloat(text);
+
+        if (!isNaN(parsedNumber)) {
+            return parsedNumber.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+        }
+
+        return text;
+    };
+
+    // Garantir que o item.prices é um array válido e parseado
+    let parsedPrices = [];
+    try {
+        parsedPrices = item.prices ? JSON.parse(item.prices) : [];
+    } catch (error) {
+        console.error("Erro ao analisar preços:", error);
+    }
+
     return (
-        <div id={props.id} className="cardProdutos">
+        <div className="cardProdutos">
             <section className="top">
                 <div>
                     <h1>{item.name}</h1>
@@ -16,6 +42,7 @@ export default function ProdutosCard({ item }, ...props) {
                     }}
                 />
             </section>
+
             <section className="price">
                 <table>
                     <thead>
@@ -25,20 +52,21 @@ export default function ProdutosCard({ item }, ...props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            JSON.parse(item.prices) &&
-                            JSON.parse(item.prices).map((value, index) => {
-                                return (
-                                    <tr key={index}>
-                                        <td>{value.descri}</td>
-                                        <td>{Number.parseFloat(value.price) ? value.price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) : value.price}</td>
-                                    </tr>
-                                )
-                            })
-                        }
+                        {parsedPrices.length > 0 ? (
+                            parsedPrices.map((value, index) => (
+                                <tr key={index}>
+                                    <td>{value.descri}</td>
+                                    <td>{confiPriceText(value.price)}</td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="2">Sem preços disponíveis</td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </section>
         </div>
-    )
+    );
 }

@@ -9,8 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "cross-spawn": "^7.0.5",
     "crypto-js": "^4.2.0",
-    "next": "14.2.2",
+    "next": "^15.0.3",
     "react": "^18",
     "react-dom": "^18",
     "react-intersection-observer": "^9.10.2",
